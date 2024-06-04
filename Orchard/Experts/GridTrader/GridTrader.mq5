@@ -10,7 +10,7 @@
 #define app_link      "https://www.orchardforex.com"
 #define app_magic     242424
 
-#include "Version 1.002/Main.mqh"
+#include "Version 1.003/Main.mqh"
 
 #property copyright app_copyright
 #property link      app_link
