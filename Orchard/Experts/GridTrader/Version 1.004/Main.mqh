@@ -17,10 +17,13 @@
    v1.003
       Clean code and remove buy/sell options
 
+   v1.004
+      Suggestion - added take profit and stop loss
+
 */
 
-#define app_version "1.003"
-#define app_magic   240501003
+#define app_version "1.004"
+#define app_magic   240501004
 
 #include "Config.mqh"
 #include "Input.mqh"

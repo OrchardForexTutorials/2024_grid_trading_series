@@ -20,6 +20,7 @@
 */
 
 #define app_version "1.002"
+#define app_magic   240501002
 
 #include "Config.mqh"
 #include "Input.mqh"

@@ -14,6 +14,7 @@
 */
 
 #define app_version "1.000"
+#define app_magic   240501000
 
 #include "Config.mqh"
 #include "Input.mqh"

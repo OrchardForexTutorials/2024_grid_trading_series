@@ -83,4 +83,13 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 		</td>
 		<td>1.0002</td>
 	</tr>
+	<tr>
+		<td>Add take profit and stop loss</td>
+		<td>
+			The suggestion didn't go into more detail so I implemented this as a simple take profit and stop loss. The results are
+			as expected but this might be starter code for you to build on the suggestion. Since the results can vary greatly
+			depending on the inputs I haven't included the result in the table of results.
+		</td>
+		<td>1.0004</td>
+	</tr>
 </table>

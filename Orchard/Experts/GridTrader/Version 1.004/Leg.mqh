@@ -17,10 +17,15 @@ class CLeg : public CLegBase {
 
 protected:
    double mLevelSize;
+   double mStopLoss;
+   double mTakeProfit;
 
    int    mCount;
-   double mEntryPrice;
-   double mExitPrice;
+   double mHeadEntryPrice;
+   double mTailEntryPrice;
+   // double              mExitPrice;
+   double mStopLossExitPrice;
+   double mTakeProfitExitPrice;
 
    void   CloseAll( double price );
    void   OpenTrade( double price );
@@ -34,7 +39,11 @@ public:
 
 CLeg::CLeg( int type ) : CLegBase( type ) {
 
-   mLevelSize = mSymbolInfo.PointsToDouble( InpLevelPoints );
+   mLevelSize  = mSymbolInfo.PointsToDouble( InpLevelPoints );
+   mStopLoss   = mSymbolInfo.PointsToDouble( InpStopLossPoints );
+   mTakeProfit = mSymbolInfo.PointsToDouble( InpTakeProfitPoints );
+
+   if ( mTakeProfit == 0 ) mTakeProfit = mLevelSize;
 
    Recount();
 }
@@ -49,13 +58,14 @@ void CLeg::On_Tick() {
    //	First process the closing rules
    //	On the first run there may be no trades but there is no harm
    double priceClose = PriceClose();
-   if ( GE( priceClose, mExitPrice ) ) {
+   if ( ( mStopLoss > 0 && LE( priceClose, mStopLossExitPrice ) ) //
+        || ( mTakeProfit > 0 && GE( priceClose, mTakeProfitExitPrice ) ) ) {
       CloseAll( priceClose );
    }
 
    //	Finally the new trade entries
    double priceOpen = PriceOpen();
-   if ( mCount == 0 || LE( priceOpen, mEntryPrice ) ) {
+   if ( mCount == 0 || LE( priceOpen, mTailEntryPrice ) || GE( priceOpen, mHeadEntryPrice ) ) {
       OpenTrade( priceOpen );
    }
 }
@@ -69,7 +79,8 @@ void CLeg::CloseAll( double priceClose ) {
       ulong  ticket    = mPositionInfo.Ticket();
       double priceOpen = mPositionInfo.PriceOpen();
 
-      if ( GE( priceClose, Add( priceOpen, mLevelSize ) ) ) {
+      if ( ( mStopLoss > 0 && LE( priceClose, Sub( priceOpen, mStopLoss ) ) ) //
+           || ( mTakeProfit > 0 && GE( priceClose, Add( priceOpen, mTakeProfit ) ) ) ) {
          mTrade.PositionClose( ticket );
       }
    }
@@ -78,7 +89,7 @@ void CLeg::CloseAll( double priceClose ) {
 
 void CLeg::OpenTrade( double priceOpen ) {
 
-   mTrade.PositionOpen( Symbol(), mOrderType, InpVolume, priceOpen, 0, 0, TradeComment, InpMagic );
+   mTrade.PositionOpen( Symbol(), mOrderType, InpVolume, priceOpen, 0, 0, InpTradeComment, InpMagic );
    Recount();
 }
 
@@ -90,12 +101,14 @@ void CLeg::OpenTrade( double priceOpen ) {
  */
 void CLeg::Recount() {
 
-   mCount      = 0;
-   mEntryPrice = 0;
-   mExitPrice  = 0;
+   mCount               = 0;
+   mHeadEntryPrice      = 0;
+   mTailEntryPrice      = 0;
+   mStopLossExitPrice   = 0;
+   mTakeProfitExitPrice = 0;
 
-   double head = 0;
-   double tail = 0;
+   double head          = 0;
+   double tail          = 0;
 
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
@@ -108,7 +121,10 @@ void CLeg::Recount() {
    }
 
    if ( mCount > 0 ) {
-      mEntryPrice = Sub( tail, mLevelSize );
-      mExitPrice  = Add( tail, mLevelSize );
+      mHeadEntryPrice      = Add( head, mLevelSize );
+      mTailEntryPrice      = Sub( tail, mLevelSize );
+
+      mTakeProfitExitPrice = Add( tail, mTakeProfit );
+      mStopLossExitPrice   = ( mStopLoss == 0 ) ? 0 : Sub( head, mStopLoss );
    }
 }
