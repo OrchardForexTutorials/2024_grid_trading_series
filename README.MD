@@ -58,10 +58,13 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 
 ### Suggestions so far
 
+Sorted according to profit and drawdown
+
 <table>
 	<thead><th>Version</th><th>Profit</th><th>Abs Drawdown</th><th>Max Drawdown</th></thead>
-	<tr> <td>1.000<br/>(Base)</td> <td>5,021</td> <td>578</td> <td>1,991</td> </tr>
-	<tr> <td>1.002</td> <td>452</td> <td>121</td> <td>542</td> </tr>
+	<tr> <td>1.000<br/>(Base)</td>      <td>5,021</td> <td>578</td> <td>1,991</td> </tr>
+	<tr> <td>1.005<br/>(Profit 10)</td> <td>1397</td>  <td>411</td> <td>674</td> </tr>
+	<tr> <td>1.002</td>                 <td>452</td>   <td>121</td> <td>542</td> </tr>
 </table>
 
 <table>
@@ -91,5 +94,14 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 			depending on the inputs I haven't included the result in the table of results.
 		</td>
 		<td>1.0004</td>
+	</tr>
+	<tr>
+		<td>Close all positions on hitting equity profit</td>
+		<td>
+			This suggestion is to wait until equity has increased by a specified amount, then close all open trades.
+			This will reduce the total amount of trades held, and reduce swap paid, at the expense of lower profit
+			but I haven't determined if the saving in swap will offset the reduced profit.
+		</td>
+		<td>1.0005</td>
 	</tr>
 </table>
