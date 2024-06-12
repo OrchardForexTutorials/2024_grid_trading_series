@@ -41,7 +41,9 @@ protected:
 public:
    CLegBase( int type );
 
-   void On_Tick();
+   void         On_Tick();
+
+   virtual bool Close(); // Close everything for the leg
 };
 
 CLegBase::CLegBase( int type ) {
@@ -58,4 +60,18 @@ void CLegBase::On_Tick() {
       Print( "refresh failed" );
       return;
    }
+}
+
+bool CLegBase::Close() {
+
+   bool result = true;
+   for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
+
+      if ( !mPositionInfo.SelectByIndex( i, Symbol(), InpMagic, mPositionType ) ) continue;
+
+      ulong ticket = mPositionInfo.Ticket();
+      result &= mTrade.PositionClose( ticket );
+   }
+
+   return result;
 }
