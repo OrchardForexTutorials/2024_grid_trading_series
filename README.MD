@@ -56,6 +56,29 @@ IF ANY, OF CERTAIN MARKET FACTORS, SUCH AS LACK OF LIQUIDITY. SIMULATED TRADING 
 ARE ALSO SUBJECT TO THE FACT THAT THEY ARE DESIGNED WITH THE BENEFIT OF HINDSIGHT.
 NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PROFIT OR LOSSES SIMILAR TO THOSE SHOWN.
 
+### Version History
+
+1.000  
+Base starter version, buy and sell at each level
+
+1.001 (from 1.000)  
+Base updated to MT4 compatibility
+
+1.002 (from 1.001)  
+Add a trend filter based on consecutive candles in the same direction
+
+1.003 (from 1.001)  
+Code update, no functional change, to remove conditional blocks of code depending on buy or sell
+
+1.004 (from 1.003)  
+Added take profit and stop loss as optional inputs
+
+1.005 (from 1.003)  
+Close all trades when specified equity targets are reached
+
+1.006 (from 1.005)  
+Update to allow persistence of information following a restart
+
 ### Suggestions so far
 
 Sorted according to profit and drawdown

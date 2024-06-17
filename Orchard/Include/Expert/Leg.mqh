@@ -21,6 +21,8 @@ protected:
    CSymbolInfoCustom   mSymbolInfo;
    CTradeCustom        mTrade;
 
+   long                mMagic;
+
    ENUM_POSITION_TYPE  mPositionType;
    ENUM_ORDER_TYPE     mOrderType;
 
@@ -44,11 +46,20 @@ public:
    void         On_Tick();
 
    virtual bool Close(); // Close everything for the leg
+
+   long         Magic() { return mMagic; }
+   long         Magic( long value ) {
+      mMagic = value;
+      mTrade.SetExpertMagicNumber( value );
+      return value;
+   }
 };
 
 CLegBase::CLegBase( int type ) {
 
    mSymbolInfo.Refresh();
+
+   mMagic        = 0;
 
    mPositionType = ( ENUM_POSITION_TYPE )type;
    mOrderType    = ( ENUM_ORDER_TYPE )type;
@@ -67,7 +78,7 @@ bool CLegBase::Close() {
    bool result = true;
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
-      if ( !mPositionInfo.SelectByIndex( i, Symbol(), InpMagic, mPositionType ) ) continue;
+      if ( !mPositionInfo.SelectByIndex( i, Symbol(), mMagic, mPositionType ) ) continue;
 
       ulong ticket = mPositionInfo.Ticket();
       result &= mTrade.PositionClose( ticket );

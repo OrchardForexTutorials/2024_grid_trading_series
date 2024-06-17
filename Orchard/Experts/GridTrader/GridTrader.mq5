@@ -9,7 +9,7 @@
 #define app_copyright "Copyright 2024, Orchard Forex"
 #define app_link      "https://www.orchardforex.com"
 
-#include "Version 1.005/Main.mqh"
+#include "Version 1.006/Main.mqh"
 
 #property copyright app_copyright
 #property link      app_link
