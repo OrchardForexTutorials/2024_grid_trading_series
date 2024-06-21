@@ -79,6 +79,9 @@ Close all trades when specified equity targets are reached
 1.006 (from 1.005)  
 Update to allow persistence of information following a restart
 
+1.007 (from 1.006)  
+Track profit on closed and open trades for the current expert
+
 ### Suggestions so far
 
 Sorted according to profit and drawdown
