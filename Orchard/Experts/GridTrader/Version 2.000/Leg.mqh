@@ -8,8 +8,6 @@
 
 */
 
-#include <Orchard/Version 1/Expert/Leg.mqh>
-
 #include "Config.mqh"
 #include "Input.mqh"
 
@@ -22,6 +20,9 @@ protected:
    double mEntryPrice;
    double mExitPrice;
 
+   bool   On_Tick_Close();
+   bool   On_Tick_Open();
+
    void   CloseAll( double price );
    void   OpenTrade( double price );
    void   Recount();
@@ -29,51 +30,47 @@ protected:
 public:
    CLeg( int type );
 
-   void On_Tick();
-
-   bool Close(); // Close everything
+   virtual void On_Tick();
 };
 
 CLeg::CLeg( int type ) : CLegBase( type ) {
 
    mLevelSize = mSymbolInfo.PointsToDouble( InpLevelPoints );
 
+   Magic( InpMagic );
+   TradeComment( InpTradeComment + " " + app_version );
+   TradeDirection( InpTradeDirection );
+
    Recount();
 }
 
-void CLeg::On_Tick() {
+void CLeg::On_Tick() { CLegBase::On_Tick(); }
 
-   if ( !mSymbolInfo.RefreshRates() ) {
-      Print( "refresh failed" );
-      return;
-   }
+bool CLeg::On_Tick_Close() {
 
-   //	First process the closing rules
-   //	On the first run there may be no trades but there is no harm
    double priceClose = PriceClose();
    if ( GE( priceClose, mExitPrice ) ) {
       CloseAll( priceClose );
    }
 
-   //	Finally the new trade entries
+   return true;
+}
+
+bool CLeg::On_Tick_Open() {
+
    double priceOpen = PriceOpen();
    if ( mCount == 0 || LE( priceOpen, mEntryPrice ) ) {
       OpenTrade( priceOpen );
    }
-}
 
-bool CLeg::Close() {
-
-   bool result = CLegBase::Close();
-   Recount();
-   return result;
+   return true;
 }
 
 void CLeg::CloseAll( double priceClose ) {
 
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
-      if ( !mPositionInfo.SelectByIndex( i, Symbol(), InpMagic, mPositionType ) ) continue;
+      if ( !mPositionInfo.SelectByIndex( i, Symbol(), mMagic, mPositionType ) ) continue;
 
       ulong  ticket    = mPositionInfo.Ticket();
       double priceOpen = mPositionInfo.PriceOpen();
@@ -87,7 +84,7 @@ void CLeg::CloseAll( double priceClose ) {
 
 void CLeg::OpenTrade( double priceOpen ) {
 
-   mTrade.PositionOpen( Symbol(), mOrderType, InpVolume, priceOpen, 0, 0, TradeComment, InpMagic );
+   mTrade.PositionOpen( Symbol(), mOrderType, InpVolume, priceOpen, 0, 0, mTradeComment );
    Recount();
 }
 
@@ -108,7 +105,7 @@ void CLeg::Recount() {
 
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
-      if ( !mPositionInfo.SelectByIndex( i, Symbol(), InpMagic, mPositionType ) ) continue;
+      if ( !mPositionInfo.SelectByIndex( i, Symbol(), mMagic, mPositionType ) ) continue;
 
       mCount++;
       double priceOpen = mPositionInfo.PriceOpen();

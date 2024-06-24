@@ -10,10 +10,10 @@
 
 #include <Object.mqh>
 
-#include <Orchard/Trade/Trade.mqh>
-#include <Orchard/Trade/PositionInfo.mqh>
-#include <Orchard/Trade/SymbolInfo.mqh>
-#include <Orchard/Persistence/GVar.mqh>
+#include <Orchard/Version 1/Trade/Trade.mqh>
+#include <Orchard/Version 1/Trade/PositionInfo.mqh>
+#include <Orchard/Version 1/Trade/SymbolInfo.mqh>
+#include <Orchard/Version 1/Persistence/GVar.mqh>
 
 // Global variables
 string TradeComment;

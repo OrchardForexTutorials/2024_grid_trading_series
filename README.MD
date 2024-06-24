@@ -82,6 +82,16 @@ Update to allow persistence of information following a restart
 1.007 (from 1.006)  
 Track profit on closed and open trades for the current expert
 
+2.000 (from 1.003)
+Also took some code from 1.007 for persistence  
+This is an update to base code but changes behaviour so a change in major version number  
+Added an input to allow trading buy/sell/none/both  
+Moved more code to the leg base  
+Changed names of base and custom class files to make them consistent with class names (this meant some restructure of include and minor upcates to old versions)
+
+2.010 (from 2.000)  
+Added inputs for high/low price to set a trading range
+
 ### Suggestions so far
 
 Sorted according to profit and drawdown
