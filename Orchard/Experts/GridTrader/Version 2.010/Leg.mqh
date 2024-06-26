@@ -39,6 +39,9 @@ public:
 
 CLeg::CLeg( int type ) : CLegBase( type ) {
 
+	Magic(InpMagic);
+	TradeComment(InpTradeComment + " " + app_version);
+	TradeDirection(InpTradeDirection);
    mLevelSize = mSymbolInfo.PointsToDouble( InpLevelPoints );
 
    Recount();
