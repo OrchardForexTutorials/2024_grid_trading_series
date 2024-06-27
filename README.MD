@@ -92,15 +92,22 @@ Changed names of base and custom class files to make them consistent with class 
 2.010 (from 2.000)  
 Added inputs for high/low price to set a trading range
 
+2.011 (based on 2.010)  
+Use a high and low moving average to set the range limits
+
+2.012 (based on 2.011)  
+Make compatible with MT4
+
 ### Suggestions so far
 
 Sorted according to profit and drawdown
 
 <table>
-	<thead><th>Version</th><th>Profit</th><th>Abs Drawdown</th><th>Max Drawdown</th></thead>
-	<tr> <td>1.000<br/>(Base)</td>      <td>5,021</td> <td>578</td> <td>1,991</td> </tr>
-	<tr> <td>1.005<br/>(Profit 10)</td> <td>1397</td>  <td>411</td> <td>674</td> </tr>
-	<tr> <td>1.002</td>                 <td>452</td>   <td>121</td> <td>542</td> </tr>
+	<thead><th colspan=2>Version</th><th>Profit</th><th>Abs Drawdown</th><th>Max Drawdown</th></thead>
+	<tr> <td>1.000</td><td>Base</td>      <td>5,021</td> <td>578</td> <td>1,991</td> </tr>
+	<tr> <td>2.011</td><td>Range MA 200 Hour</td>      <td>3,670</td> <td>329</td> <td>1,312</td> </tr>
+	<tr> <td>1.005</td><td>Equity close at 10</td> <td>1,397</td>  <td>411</td> <td>674</td> </tr>
+	<tr> <td>1.002</td><td>TP SL</td>                 <td>452</td>   <td>121</td> <td>542</td> </tr>
 </table>
 
 <table>
@@ -140,4 +147,14 @@ Sorted according to profit and drawdown
 		</td>
 		<td>1.0005</td>
 	</tr>
+	<tr>
+		<td>Use range limits for buy and sell trades</td>
+		<td>
+			The suggestion has come in many forms and there are 3 sub types that I will cover as different versions.
+			The first version uses manually entered upper and lower limits and is a good idea because it allows you to
+			use any analysis techniques to adjust the limits but it cannot be backtested for a result. The second uses
+			a trend type indicator to set dynamic upper and lower limits and the third uses oscillators to only trade
+			if the oscillator is in certain ranges.
+		</td>
+		<td>2.010<br/>2.011<br/>2.012<br/>2.013</td>
 </table>

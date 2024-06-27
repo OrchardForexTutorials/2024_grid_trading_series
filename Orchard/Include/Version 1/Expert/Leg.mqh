@@ -26,6 +26,11 @@ protected:
    ENUM_POSITION_TYPE  mPositionType;
    ENUM_ORDER_TYPE     mOrderType;
 
+   // Trading ranges
+   double              mRangeValue;
+   int                 mRangeHandle;
+   int                 mRangeBuffer;
+
    void                Loop( MqlTick &lastTick );
 
    double              Add( double value1, double value2 ) { return ( mPositionType == POSITION_TYPE_BUY ) ? value1 + value2 : value1 - value2; }
@@ -52,6 +57,12 @@ public:
       mMagic = value;
       mTrade.SetExpertMagicNumber( value );
       return value;
+   }
+
+   void SetRangeValue( double value ) { mRangeValue = value; }
+   void SetRangeIndicator( int handle, int buffer ) {
+      mRangeHandle = handle;
+      mRangeBuffer = buffer;
    }
 };
 

@@ -27,10 +27,12 @@ protected:
    void   OpenTrade( double price );
    void   Recount();
 
+   bool   IsRangeOK( double price );
+
 public:
    CLeg( int type );
 
-   virtual void On_Tick();
+   void On_Tick();
 };
 
 CLeg::CLeg( int type ) : CLegBase( type ) {
@@ -58,6 +60,10 @@ bool CLeg::On_Tick_Close() {
 bool CLeg::On_Tick_Open() {
 
    double priceOpen = PriceOpen();
+
+   // Range check
+   if ( !IsRangeOK( priceOpen ) ) return true;
+
    if ( mCount == 0 || LE( priceOpen, mEntryPrice ) ) {
       OpenTrade( priceOpen );
    }
@@ -69,7 +75,7 @@ void CLeg::CloseAll( double priceClose ) {
 
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
-      if ( !mPositionInfo.SelectByIndex( i, Symbol(), mMagic, mPositionType ) ) continue;
+      if ( !mPositionInfo.SelectByIndex( i, Symbol(), InpMagic, mPositionType ) ) continue;
 
       ulong  ticket    = mPositionInfo.Ticket();
       double priceOpen = mPositionInfo.PriceOpen();
@@ -83,7 +89,7 @@ void CLeg::CloseAll( double priceClose ) {
 
 void CLeg::OpenTrade( double priceOpen ) {
 
-   mTrade.PositionOpen( Symbol(), mOrderType, InpVolume, priceOpen, 0, 0, mTradeComment );
+   mTrade.PositionOpen( Symbol(), mOrderType, InpVolume, priceOpen, 0, 0, mTradeComment, InpMagic );
    Recount();
 }
 
@@ -104,7 +110,7 @@ void CLeg::Recount() {
 
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
-      if ( !mPositionInfo.SelectByIndex( i, Symbol(), mMagic, mPositionType ) ) continue;
+      if ( !mPositionInfo.SelectByIndex( i, Symbol(), InpMagic, mPositionType ) ) continue;
 
       mCount++;
       double priceOpen = mPositionInfo.PriceOpen();
@@ -116,4 +122,16 @@ void CLeg::Recount() {
       mEntryPrice = Sub( tail, mLevelSize );
       mExitPrice  = Add( tail, mLevelSize );
    }
+}
+
+bool CLeg::IsRangeOK( double price ) {
+
+   // for Trend indicator range
+
+   if ( mRangeIndicatorHandle == INVALID_HANDLE ) return false;
+
+   double value[];
+   if ( CopyBuffer( mRangeIndicatorHandle, mRangeIndicatorBuffer, mRangeIndicatorIndex, 1, value ) < 1 ) return false;
+   if ( GT( price, value[0] ) ) return false;
+   return true;
 }

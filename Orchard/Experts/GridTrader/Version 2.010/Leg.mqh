@@ -8,8 +8,6 @@
 
 */
 
-#include <Orchard/Version 2/Expert/LegBase.mqh>
-
 #include "Config.mqh"
 #include "Input.mqh"
 
@@ -39,9 +37,9 @@ public:
 
 CLeg::CLeg( int type ) : CLegBase( type ) {
 
-	Magic(InpMagic);
-	TradeComment(InpTradeComment + " " + app_version);
-	TradeDirection(InpTradeDirection);
+   Magic( InpMagic );
+   TradeComment( InpTradeComment + " " + app_version );
+   TradeDirection( InpTradeDirection );
    mLevelSize = mSymbolInfo.PointsToDouble( InpLevelPoints );
 
    Recount();

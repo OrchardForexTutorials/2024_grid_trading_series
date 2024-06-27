@@ -7,6 +7,8 @@
 
 */
 
+#ifdef __MQL5__
+
 bool IsTradeAllowed() {
 
    //	Is trading and auto trading allowed
@@ -15,6 +17,8 @@ bool IsTradeAllowed() {
             && AccountInfoInteger( ACCOUNT_TRADE_EXPERT ) //
             && AccountInfoInteger( ACCOUNT_TRADE_ALLOWED ) );
 }
+
+#endif
 
 bool IsNewBar() {
 

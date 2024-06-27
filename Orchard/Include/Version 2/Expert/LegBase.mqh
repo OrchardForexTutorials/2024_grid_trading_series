@@ -9,6 +9,7 @@
 */
 
 #include <Object.mqh>
+#include <Indicators/Indicator.mqh>
 
 #include "../Common/Enums.mqh"
 #include "../Trade/PositionInfoCustom.mqh"
@@ -31,6 +32,10 @@ protected:
 
    // Trading ranges
    double               mRangeValue;
+   int                  mRangeIndicatorHandle;
+   int                  mRangeIndicatorBuffer;
+   int                  mRangeIndicatorIndex;
+   CIndicator          *mRangeIndicatorObject;
 
    virtual bool         On_Tick_Close() = 0;
    virtual bool         On_Tick_Open()  = 0;
@@ -74,17 +79,33 @@ public:
    }
 
    void SetRangeValue( double value ) { mRangeValue = value; }
+   void SetRangeIndicator( int handle, int buffer, int index ) {
+      mRangeIndicatorHandle = handle;
+      mRangeIndicatorBuffer = buffer;
+      mRangeIndicatorIndex  = index;
+   }
+   void SetRangeIndicatorObject( CIndicator *obj, int buffer, int index ) {
+      mRangeIndicatorObject = obj;
+      mRangeIndicatorBuffer = buffer;
+      mRangeIndicatorIndex  = index;
+   }
 };
 
 CLegBase::CLegBase( int type ) {
 
    mSymbolInfo.Refresh();
 
-   mMagic          = 0;
-   mTradeDirection = TRADE_DIRECTION_NONE;
+   mMagic                = 0;
+   mTradeDirection       = TRADE_DIRECTION_NONE;
 
-   mPositionType   = ( ENUM_POSITION_TYPE )type;
-   mOrderType      = ( ENUM_ORDER_TYPE )type;
+   mPositionType         = ( ENUM_POSITION_TYPE )type;
+   mOrderType            = ( ENUM_ORDER_TYPE )type;
+
+   mRangeValue           = 0;
+   mRangeIndicatorHandle = INVALID_HANDLE;
+   mRangeIndicatorBuffer = 0;
+   mRangeIndicatorIndex  = 0;
+   mRangeIndicatorObject = NULL;
 }
 
 void CLegBase::On_Tick() {

@@ -10,10 +10,7 @@
 
 #include <Object.mqh>
 
-enum ENUM_POSITION_TYPE {
-   POSITION_TYPE_BUY  = ORDER_TYPE_BUY,
-   POSITION_TYPE_SELL = ORDER_TYPE_SELL,
-};
+#include "../../Common/Enums.mqh"
 
 class CPositionInfo : public CObject {
 
