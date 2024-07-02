@@ -58,29 +58,26 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 
 ### Version History
 
-1.000  
-Base starter version, buy and sell at each level
+Note: the latest version does not contain every earlier version. These versions are investigating different approaches
+to grid trading and are not a continuous improvement. The note beside each version number (from or based on) indicates
+the version that was used as the starting code for the version and does not mean that the features of the earlier
+version are retained.
 
-1.001 (from 1.000)  
-Base updated to MT4 compatibility
+The list below shows the most recent version first.
 
-1.002 (from 1.001)  
-Add a trend filter based on consecutive candles in the same direction
+2.013 (based on 2.012)  
+Changed from an trend indicator to an oscillator (RSI). Only buy if RSI is below a specified high and only sell if RSI os above the specified low  
+Changed the folder structure in git, removed the Orchard folder from the top level and inserted Orchard under each of experts and includes. You can
+now just copy the contents of experts to your experts folder and so on.
 
-1.003 (from 1.001)  
-Code update, no functional change, to remove conditional blocks of code depending on buy or sell
+2.012 (based on 2.011)  
+Make compatible with MT4
 
-1.004 (from 1.003)  
-Added take profit and stop loss as optional inputs
+2.011 (based on 2.010)  
+Use a high and low moving average to set the range limits. Only buy if price is below the range high, only sell if price is above range low.
 
-1.005 (from 1.003)  
-Close all trades when specified equity targets are reached
-
-1.006 (from 1.005)  
-Update to allow persistence of information following a restart
-
-1.007 (from 1.006)  
-Track profit on closed and open trades for the current expert
+2.010 (from 2.000)  
+Added inputs for high/low price to set a trading range
 
 2.000 (from 1.003)
 Also took some code from 1.007 for persistence  
@@ -89,25 +86,41 @@ Added an input to allow trading buy/sell/none/both
 Moved more code to the leg base  
 Changed names of base and custom class files to make them consistent with class names (this meant some restructure of include and minor upcates to old versions)
 
-2.010 (from 2.000)  
-Added inputs for high/low price to set a trading range
+1.007 (from 1.006)  
+Track profit on closed and open trades for the current expert
 
-2.011 (based on 2.010)  
-Use a high and low moving average to set the range limits
+1.006 (from 1.005)  
+Update to allow persistence of information following a restart
 
-2.012 (based on 2.011)  
-Make compatible with MT4
+1.005 (from 1.003)  
+Close all trades when specified equity targets are reached
+
+1.004 (from 1.003)  
+Added take profit and stop loss as optional inputs
+
+1.003 (from 1.001)  
+Code update, no functional change, to remove conditional blocks of code depending on buy or sell
+
+1.002 (from 1.001)  
+Add a trend filter based on consecutive candles in the same direction
+
+1.001 (from 1.000)  
+Base updated to MT4 compatibility
+
+1.000  
+Base starter version, buy and sell at each level
 
 ### Suggestions so far
 
 Sorted according to profit and drawdown
 
 <table>
-	<thead><th colspan=2>Version</th><th>Profit</th><th>Abs Drawdown</th><th>Max Drawdown</th></thead>
-	<tr> <td>1.000</td><td>Base</td>      <td>5,021</td> <td>578</td> <td>1,991</td> </tr>
-	<tr> <td>2.011</td><td>Range MA 200 Hour</td>      <td>3,670</td> <td>329</td> <td>1,312</td> </tr>
-	<tr> <td>1.005</td><td>Equity close at 10</td> <td>1,397</td>  <td>411</td> <td>674</td> </tr>
-	<tr> <td>1.002</td><td>TP SL</td>                 <td>452</td>   <td>121</td> <td>542</td> </tr>
+<thead><th colspan=2>Version</th><th>Profit</th><th>Abs Drawdown</th><th>Max Drawdown</th></thead>
+<tr><td>1.000</td><td>Base</td><td>5,021</td><td>578</td><td>1,991</td></tr>
+<tr><td>2.011</td><td>Range MA 200 Hour</td><td>3,670</td><td>329</td><td>1,312</td></tr>
+<tr><td>2.013</td><td>RSI 50/50</td><td>2,720</td><td>333</td><td>1,020</td></tr>
+<tr><td>1.005</td><td>Equity close at 10</td><td>1,397</td><td>411</td><td>674</td></tr>
+<tr><td>1.002</td><td>TP/SL</td><td>452</td><td>121</td><td>542</td></tr>
 </table>
 
 <table>
@@ -150,11 +163,14 @@ Sorted according to profit and drawdown
 	<tr>
 		<td>Use range limits for buy and sell trades</td>
 		<td>
-			The suggestion has come in many forms and there are 3 sub types that I will cover as different versions.
+			The suggestion has come in many forms and there are 3 sub types that I will cover as different versions.<br/>
 			The first version uses manually entered upper and lower limits and is a good idea because it allows you to
-			use any analysis techniques to adjust the limits but it cannot be backtested for a result. The second uses
-			a trend type indicator to set dynamic upper and lower limits and the third uses oscillators to only trade
-			if the oscillator is in certain ranges.
+			use any analysis techniques to adjust the limits but it cannot be backtested for a result. The grid trader
+			will only buy if price is below the limit high and only sell of price is above the limit low.<br/>
+			The second uses a trend type indicator to set dynamic upper and lower limits. The rules for buy and sell
+			are the same as for the manual range<br/>
+			The third uses oscillators to only buy if the oscillator value is below a specified high and only sell if the
+			value is above the specified low. In this case the high and low are not prices because they are oscillator values
 		</td>
 		<td>2.010<br/>2.011<br/>2.012<br/>2.013</td>
 </table>
