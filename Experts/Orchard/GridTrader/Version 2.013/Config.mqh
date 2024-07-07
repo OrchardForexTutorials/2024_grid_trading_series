@@ -11,6 +11,10 @@
 #include <Object.mqh>
 #include <Indicators/Oscilators.mqh>
 
+#ifdef __MQL4__
+double CiATR::GetData( const int buffer_num, const int index ) const { return Main( index ); }
+#endif
+
 #include <Orchard/Version 2/Common/Enums.mqh>
 #include <Orchard/Version 2/Common/Functions.mqh>
 #include <Orchard/Version 2/Expert/LegBase.mqh>
