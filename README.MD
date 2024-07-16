@@ -65,6 +65,10 @@ version are retained.
 
 The list below shows the most recent version first.
 
+2.020 (based on 2.000)  
+An input to set an aveerage profit per lot as a target.
+Then all trades for a leg are closed once the total profit for the leg reaches the target (adjusted for the total volume)
+
 2.013 (based on 2.012)  
 Changed from an trend indicator to an oscillator (RSI). Only buy if RSI is below a specified high and only sell if RSI os above the specified low  
 Changed the folder structure in git, removed the Orchard folder from the top level and inserted Orchard under each of experts and includes. You can
@@ -118,6 +122,7 @@ Sorted according to profit and drawdown
 <thead><th colspan=2>Version</th><th>Profit</th><th>Abs Drawdown</th><th>Max Drawdown</th></thead>
 <tr><td>1.000</td><td>Base</td><td>5,021</td><td>578</td><td>1,991</td></tr>
 <tr><td>2.011</td><td>Range MA 200 Hour</td><td>3,670</td><td>329</td><td>1,312</td></tr>
+<tr><td>2.020</td><td>Average price close</td><td>3,593</td><td>870</td><td>2,793</td></tr>
 <tr><td>2.013</td><td>RSI 50/50</td><td>2,720</td><td>333</td><td>1,020</td></tr>
 <tr><td>1.005</td><td>Equity close at 10</td><td>1,397</td><td>411</td><td>674</td></tr>
 <tr><td>1.002</td><td>TP/SL</td><td>452</td><td>121</td><td>542</td></tr>
@@ -173,4 +178,14 @@ Sorted according to profit and drawdown
 			value is above the specified low. In this case the high and low are not prices because they are oscillator values
 		</td>
 		<td>2.010<br/>2.011<br/>2.012<br/>2.013</td>
+	</tr>
+	<tr>
+		<td>Close positions at an average profit</td>
+		<td>
+			This suggestion came as 2 parts, close trades at an average profit and increase trade size as there are more levels.
+			This is the first part where I apply the average profit close. The next part will add martingale to the
+			position size and a third part will explore martingale without average close.
+		</td>
+		<td>2.020</td>
+	</tr>
 </table>

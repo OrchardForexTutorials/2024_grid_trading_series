@@ -15,11 +15,15 @@
 class CPositionInfo : public CObject {
 
 public:
-   string             Symbol() { return OrderSymbol(); }
+   double             Commission() { return OrderCommission(); }
    long               Magic() { return OrderMagicNumber(); }
    ENUM_POSITION_TYPE PositionType() { return ( ENUM_POSITION_TYPE )OrderType(); }
    double             PriceOpen() { return OrderOpenPrice(); }
+   double             Profit() { return OrderProfit(); }
+   double             Swap() { return OrderSwap(); }
+   string             Symbol() { return OrderSymbol(); }
    ulong              Ticket() { return ( ulong )OrderTicket(); }
+   double             Volume() { return OrderLots(); }
 
    int                PositionsTotal() { return OrdersTotal(); }
 
