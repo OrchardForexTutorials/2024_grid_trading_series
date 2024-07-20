@@ -65,6 +65,10 @@ version are retained.
 
 The list below shows the most recent version first.
 
+2.021 (based on 2.020)  
+Increase the volume of trades based on the number of trades open  
+Use inputs to specify the amount to increase the trade and number of trades to open before incrementing
+
 2.020 (based on 2.000)  
 An input to set an aveerage profit per lot as a target.
 Then all trades for a leg are closed once the total profit for the leg reaches the target (adjusted for the total volume)
@@ -126,7 +130,9 @@ Sorted according to profit and drawdown
 <tr><td>2.013</td><td>RSI 50/50</td><td>2,720</td><td>333</td><td>1,020</td></tr>
 <tr><td>1.005</td><td>Equity close at 10</td><td>1,397</td><td>411</td><td>674</td></tr>
 <tr><td>1.002</td><td>TP/SL</td><td>452</td><td>121</td><td>542</td></tr>
+<tr><td>2.021</td><td>Average close + incremental volume</td><td>11,261</td><td>6,694</td><td>6,985</td></tr>
 </table>
+
 
 <table>
 	<thead><th>Suggestion</th><th>Comments</th><th>In Version</th></thead>
@@ -187,5 +193,13 @@ Sorted according to profit and drawdown
 			position size and a third part will explore martingale without average close.
 		</td>
 		<td>2.020</td>
+	</tr>
+	<tr>
+		<td>Close positions at an average profit with increasing trade size</td>
+		<td>
+			The second part of the suggestion for 2.020, close trades at an average profit and increase trade size as there are more levels.
+			The code here increases trade size by a linear increment as each group of n trades are opened.
+		</td>
+		<td>2.021</td>
 	</tr>
 </table>
