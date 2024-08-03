@@ -133,19 +133,24 @@ void CLeg::Recount() {
       if ( tailPrice == 0 || LT( priceOpen, tailPrice ) ) tailPrice = priceOpen;
    }
 
+   if ( mCount == 0 ) {
+      mAverageProfit = 0;
+      return;
+   }
+
    // Get the total profit for qualifying trades, not the head
    for ( int i = mPositionInfo.Total() - 1; i >= 0; i-- ) {
 
       if ( !mPositionInfo.SelectByIndex( i, Symbol(), mMagic, mPositionType ) ) continue;
       if ( mPositionInfo.Ticket() == mHeadTicket ) continue;
 
+      mCount++;
+
       double priceOpen = mPositionInfo.PriceOpen();
       if ( GT( priceOpen, maximumPriceOpen ) ) continue;
 
       double volume = mPositionInfo.Volume();
       double profit = volume * Dif( priceClose, priceOpen );
-
-      mCount++;
 
       mProfitOpen += profit;
       mVolumeOpen += volume;
