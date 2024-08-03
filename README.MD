@@ -65,6 +65,14 @@ version are retained.
 
 The list below shows the most recent version first.
 
+2.023 (based on 2.021)  
+Average the head trade with profitable tail trades  
+If the average profit of the head trade with the profitable tail trades is sufficient close those trades together.
+
+2.022 (based on 2.021)  
+Use the volume increment method but do not use the average close.  
+Closing is the same as the original grid trader, each trade closes at the next level.
+
 2.021 (based on 2.020)  
 Increase the volume of trades based on the number of trades open  
 Use inputs to specify the amount to increase the trade and number of trades to open before incrementing
@@ -127,9 +135,11 @@ Sorted according to profit and drawdown
 <tr><td>1.000</td><td>Base</td><td>5,021</td><td>578</td><td>1,991</td></tr>
 <tr><td>2.011</td><td>Range MA 200 Hour</td><td>3,670</td><td>329</td><td>1,312</td></tr>
 <tr><td>2.020</td><td>Average price close</td><td>3,593</td><td>870</td><td>2,793</td></tr>
+<tr><td>2.023</td><td>Average head trade</td><td>3,069</td><td>526</td><td>2,016</td></tr>
 <tr><td>2.013</td><td>RSI 50/50</td><td>2,720</td><td>333</td><td>1,020</td></tr>
 <tr><td>1.005</td><td>Equity close at 10</td><td>1,397</td><td>411</td><td>674</td></tr>
 <tr><td>1.002</td><td>TP/SL</td><td>452</td><td>121</td><td>542</td></tr>
+<tr><td>2.022</td><td>Incremental volume</td><td>66,464</td><td>4,149</td><td>22,679</td></tr>
 <tr><td>2.021</td><td>Average close + incremental volume</td><td>11,261</td><td>6,694</td><td>6,985</td></tr>
 </table>
 
@@ -201,5 +211,22 @@ Sorted according to profit and drawdown
 			The code here increases trade size by a linear increment as each group of n trades are opened.
 		</td>
 		<td>2.021</td>
+	</tr>
+	<tr>
+		<td>Increasing trade size without average close</td>
+		<td>
+			Based on the 2 earlier parts, just a quick update to see if there is a good result from applying the size increment without
+			holding trades until the average is reached
+		</td>
+		<td>2.022</td>
+	</tr>
+	<tr>
+		<td>Close tail positions in profit averaged with the head position</td>
+		<td>
+			Not so much a suggestion but an idea I had from the average close method. This will take the average profit of
+			all trailing trades (low buys or high sells) that are in profit by more than the average plus the one leading trade
+			and if the average of all of those meets the target average then close the profit trades and close the leading trade.
+		</td>
+		<td>2.023</td>
 	</tr>
 </table>
