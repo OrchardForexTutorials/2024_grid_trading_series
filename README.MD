@@ -65,6 +65,14 @@ version are retained.
 
 The list below shows the most recent version first.
 
+2.030 (based on 2.000)
+From a suggestion referencing a video by Expert4x which I can not find
+Close the tail trade at each level,
+apply the profit for the tail against a partial close minimum volume of the head.
+This may give an overall profit or a loss if there are too many levels open.
+Requires the initial volume to be large enough to allow for partial trading
+This is a higher volume and therefore higher risk approach.
+
 2.023 (based on 2.021)  
 Average the head trade with profitable tail trades  
 If the average profit of the head trade with the profitable tail trades is sufficient close those trades together.
